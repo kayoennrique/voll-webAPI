@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 const Container = styled.section`
-background-color: var(--cinza-claro);
+background-color: var(--light-gray);
 margin: 4em;
 border-radius: 16px;
 padding: 2em;
-height: 100%
-`
+height: 100%;
+`;
 
 export default Container;

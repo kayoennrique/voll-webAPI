@@ -1,11 +1,11 @@
 :root {
-  --azul-claro: #339CFF;
-  --azul-escuro: #0B3B60;
-  --branco: #FFFFFF;
-  --cinza: #6B6E71;
-  --cinza-claro: #E7EBEF;
-  --fonte-principal: 'Public Sans', sans-serif;
-  --fonte-secundaria: 'Archivo', sans-serif;
+  --light-blue: #339CFF;
+  --dark-blue: #0B3B60;
+  --white: #FFFFFF;
+  --gray: #6B6E71;
+  --light-gray: #E7EBEF;
+  --main-font: 'Public Sans', sans-serif;
+  --secondary-font: 'Archivo', sans-serif;
 }
 
 body {

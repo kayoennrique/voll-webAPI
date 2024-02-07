@@ -1,4 +1,4 @@
-export default interface IProfissional {
+export default interface IProfessional {
     id: number,
     imagem: string,
     nome: string,

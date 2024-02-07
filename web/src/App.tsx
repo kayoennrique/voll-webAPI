@@ -1,39 +1,39 @@
 import './App.css';
-import Avaliacao from './components/Avaliacao';
-import Botao from './components/Botao';
-import Cabecalho from './components/Cabecalho';
+import useDataProfessional from './useDataProfessional';
+import useQueryData from './useQueryData';
+import Header from './components/Header';
 import Container from './components/Container';
-import Grafico from './components/Grafico';
-import Rodape from './components/Rodape';
-import Subtitulo from './components/Subtitulo';
-import Tabela from './components/Tabela';
-import Titulo from './components/Titulo';
-import useDadosConsulta from './useDadosConsulta';
-import useDadosProfissional from './useDadosProfissional';
+import Title from './components/Title';
+import Footer from './components/Footer';
+import Tablle from './components/Table';
+import Graphic from './components/Graphic';
+import Assessment from './components/Assessment';
+import Button from './components/Button';
+import Subtitle from './components/Subtitle';
 
 function App() {
-  const { dados: consultas, erro: consultasErro } = useDadosConsulta();
-  const { dados: profissionais, erro: profissionaisErro } = useDadosProfissional();
+  const { dados: consultas, erro: queriesErro } = useQueryData();
+  const { dados: profissionais, erro: errroProfessional } = useDataProfessional();
 
-  if (consultasErro || profissionaisErro) {
+  if (queriesErro || errroProfessional) {
     console.log("Ocorreu um erro na requisição")
   }
 
   return (
     <>
-      <Cabecalho />
+      <Header />
       <Container>
-        <Titulo>Área Administrativa</Titulo>
-        <Botao>Cadastrar especialista</Botao>
-        <Titulo imagem="consulta">Consultas do Dia</Titulo>
-        <Tabela consultas={consultas} />
-        <Titulo imagem="grafico">Consultas mensais por especialista</Titulo>
-        <Subtitulo>Dezembro/22</Subtitulo>
-        <Grafico consultas={consultas} profissionais={profissionais} />
-        <Titulo imagem="avaliacao">Avaliações de especialistas</Titulo>
-        <Avaliacao profissionais={profissionais} />
+        <Title>Área Administrativa</Title>
+        <Button>Cadastrar especialista</Button>
+        <Title imagem="query">Consultas do Dia</Title>
+        <Tablle consultas={consultas} />
+        <Title imagem="graphic">Consultas mensais por especialista</Title>
+        <Subtitle>Dezembro/24</Subtitle>
+        <Graphic consultas={consultas} profissionais={profissionais} />
+        <Title imagem="assessment">Avaliações de especialistas</Title>
+        <Assessment profissionais={profissionais} />
       </Container>
-      <Rodape />
+      <Footer />
     </>
   );
 }
