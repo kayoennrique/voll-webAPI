@@ -5,6 +5,8 @@ import { useState } from 'react';
 import Button from "../../components/Button";
 import FieldDigitation from "../../components/FieldDigitation";
 import IClinic from "../../types/IClinic";
+import usePost from "../../usePost";
+import { useNavigate } from "react-router-dom";
 
 const Image = styled.img`
   padding: 2em 0;
@@ -19,7 +21,7 @@ const StepCustomized = styled.div<CustomProps>`
     width: 16px;
     height: 16px;
     border-radius: 50%;
-`
+`;
 
 const Title = styled.h2`
   font-weight: 700;
@@ -58,26 +60,40 @@ export default function Register() {
   const [cep, setCep] = useState('');
   const [rua, setRua] = useState('');
   const [numero, setNumero] = useState('');
-  const [complemento, setComplemento] = useState('');
   const [estado, setEstado] = useState('');
+  const [complemento, setComplemento] = useState('');
+  const { registerData, erro, success } = usePost();
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // previne o envio padrão do formulário
+
+
+    const clinica: IClinic = {
+      email: email,
+      nome: nome,
+      senha: senha,
+      endereco: {
+        cep: cep,
+        rua: rua,
+        numero: numero,
+        complemento: complemento,
+        estado: estado
+      }
+    }
+
+    if (activeStep !== 0) {
+      try {
+        registerData({ url: 'clinica', dados: clinica });
+        navigate('/login');
+      } catch (erro) {
+        erro && alert('Erro ao cadastrar os dados')
+      }
+    }
+
     setActiveStep(activeStep + 1); // atualiza o estado da etapa para a próxima etapa
   }
 
-  const clinic: IClinic = {
-    email: email,
-    nome: nome,
-    senha: senha,
-    endereco: {
-      cep: cep,
-      rua: rua,
-      numero: numero,
-      complemento: complemento,
-      estado: estado
-    }
-  }
 
   return (
     <>
