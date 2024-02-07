@@ -2,7 +2,8 @@
 	"compilerOptions": {
 		"module": "ES2022",
 		"lib": [
-			"ES6"
+			"ES6",
+			"dom"
 		],
 		"rootDirs": [
 			"./src"
