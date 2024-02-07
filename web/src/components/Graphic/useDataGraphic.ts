@@ -14,7 +14,7 @@ interface Props {
 const useDataGraphic = ({ profissionais, consultas }: Props) => {
   let dados: Array<IData> = [];
 
-  if (profissionais && consultas) {
+  if (profissionais && profissionais.length && consultas) {
     dados = profissionais.map((profissional) => ({
       nome: profissional.nome,
       consultas: consultas.filter((consulta) =>

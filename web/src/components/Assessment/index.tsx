@@ -14,11 +14,17 @@ function Assessment({ profissionais }: { profissionais: IProfessional[] | null }
   return (
     <>
       <CardSection>
-        {profissionais?.map((profissional) => {
-          return <Card profissional={profissional} />
-        })}
+        {profissionais && profissionais.length
+          ? profissionais.map((profissional) => {
+            return <Card profissional={profissional} />;
+          })
+          :
+          "Não há avaliações para mostrar"}
       </CardSection>
-      <Button>Ver mais</Button>
+      {profissionais && profissionais.length > 4 ?
+        <Button>Ver mais</Button>
+        : ""
+      }
     </>
   );
 }

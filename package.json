@@ -1,0 +1,28 @@
+{
+  "name": "voll-webapi",
+  "version": "1.0.0",
+  "description": "This project aims to build a registration and authentication flow in React with Typescript, using elements from the MUI, MobX and React-Router-Dom libraries.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kayoennrique/voll-webAPI.git"
+  },
+  "author": "kayoennrique",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kayoennrique/voll-webAPI/issues"
+  },
+  "homepage": "https://github.com/kayoennrique/voll-webAPI#readme",
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
