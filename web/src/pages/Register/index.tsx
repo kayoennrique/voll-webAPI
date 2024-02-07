@@ -4,6 +4,7 @@ import { Step, StepLabel, Stepper } from "@mui/material";
 import { useState } from 'react';
 import Button from "../../components/Button";
 import FieldDigitation from "../../components/FieldDigitation";
+import IClinic from "../../types/IClinic";
 
 const Image = styled.img`
   padding: 2em 0;
@@ -49,15 +50,15 @@ const Container = styled.div`
 export default function Register() {
   const [activeStep, setActiveStep] = useState(0);
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [senha, setSenha] = useState('');
+  const [nome, setNome] = useState('');
   const [cnpj, setCnpj] = useState('');
-  const [passwordVerified, setPasswordVerified] = useState('');
-  const [telephone, setTelephone] = useState('');
+  const [senhaVerificada, setSenhaVerificada] = useState('');
+  const [telefone, setTelefone] = useState('');
   const [cep, setCep] = useState('');
   const [rua, setRua] = useState('');
-  const [number, setNumber] = useState('');
-  const [complement, setComplement] = useState('');
+  const [numero, setNumero] = useState('');
+  const [complemento, setComplemento] = useState('');
   const [estado, setEstado] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -65,6 +66,18 @@ export default function Register() {
     setActiveStep(activeStep + 1); // atualiza o estado da etapa para a próxima etapa
   }
 
+  const clinic: IClinic = {
+    email: email,
+    nome: nome,
+    senha: senha,
+    endereco: {
+      cep: cep,
+      rua: rua,
+      numero: numero,
+      complemento: complemento,
+      estado: estado
+    }
+  }
 
   return (
     <>
@@ -93,9 +106,9 @@ export default function Register() {
             <FieldDigitation
               kind="text"
               label="Nome"
-              amount={name}
+              amount={nome}
               placeholder="Insira seu nome"
-              onChange={setName}
+              onChange={setNome}
             />
             <FieldDigitation
               kind="text"
@@ -114,16 +127,16 @@ export default function Register() {
             <FieldDigitation
               kind="password"
               label="Senha"
-              amount={password}
+              amount={senha}
               placeholder="Digite sua senha"
-              onChange={setPassword}
+              onChange={setSenha}
             />
             <FieldDigitation
               kind="password"
               label="Confirme a senha"
-              amount={passwordVerified}
+              amount={senhaVerificada}
               placeholder="Confirme sua senha"
-              onChange={setPasswordVerified}
+              onChange={setSenhaVerificada}
             />
             <ButtonCustomized type="submit">Avançar</ButtonCustomized>
           </Form>
@@ -134,9 +147,9 @@ export default function Register() {
             <FieldDigitation
               kind="tel"
               label="Telefone"
-              amount={telephone}
+              amount={telefone}
               placeholder="(DDD) XXXXX-XXXX"
-              onChange={setTelephone}
+              onChange={setTelefone}
             />
             <FieldDigitation
               kind="number"
@@ -155,15 +168,15 @@ export default function Register() {
             <Container>
               <FieldDigitation
                 kind="number"
-                amount={number}
+                amount={numero}
                 placeholder="Número"
-                onChange={setNumber}
+                onChange={setNumero}
               />
               <FieldDigitation
                 kind="text"
-                amount={complement}
+                amount={complemento}
                 placeholder="Complemento"
-                onChange={setComplement}
+                onChange={setComplemento}
               />
               <FieldDigitation
                 kind="text"
