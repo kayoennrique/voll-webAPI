@@ -4,6 +4,7 @@ import PageDefault from "./pages/PageDefault";
 import PageDefaultForm from "./pages/PageDefaultForm";
 import Login from "./pages/Login";
 import HomePage from "./pages/HomePage";
+import Register from "./pages/Register";
 
 function AppRoutes() {
   return (
@@ -15,6 +16,7 @@ function AppRoutes() {
         </Route>
         <Route path="/" element={<PageDefaultForm />}>
           <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Register />} />
         </Route>
       </Routes>
     </BrowserRouter>
