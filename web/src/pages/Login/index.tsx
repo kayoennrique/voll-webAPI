@@ -5,6 +5,7 @@ import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import FiledDigitation from "../../components/FieldDigitation";
 import usePost from "../../usePost";
+import authenticStore from "../../stories/authenticate.store";
 
 const Image = styled.img`
   padding: 2em 0;
@@ -53,7 +54,7 @@ interface ILogin {
 export default function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const { registerData, erro, success } = usePost();
+  const { registerData, erro, success, response } = usePost();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -63,6 +64,7 @@ export default function Login() {
     }
     try {
       registerData({ url: "auth/login", dados: usuario })
+      authenticStore.login({ email: email, token: response })
     } catch (erro) {
       erro && alert('Não foi possível fazer login')
     }
