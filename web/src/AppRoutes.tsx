@@ -5,6 +5,7 @@ import PageDefaultForm from "./pages/PageDefaultForm";
 import Login from "./pages/Login";
 import HomePage from "./pages/HomePage";
 import Register from "./pages/Register";
+import PrivateRoute from "./utils/PrivateRoute";
 
 function AppRoutes() {
   return (
@@ -12,7 +13,9 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<PageDefault />}>
           <Route index element={<HomePage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
         </Route>
         <Route path="/" element={<PageDefaultForm />}>
           <Route path="/login" element={<Login />} />

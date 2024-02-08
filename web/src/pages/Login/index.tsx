@@ -2,10 +2,10 @@ import styled from "styled-components";
 import React, { useState } from 'react';
 import logo from './Logo.png';
 import Button from "../../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FiledDigitation from "../../components/FieldDigitation";
 import usePost from "../../usePost";
-import authenticStore from "../../stories/authenticate.store";
+import authenticStore from "../../stores/authenticate.store";
 
 const Image = styled.img`
   padding: 2em 0;
@@ -55,6 +55,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const { registerData, erro, success, response } = usePost();
+  const navigate = useNavigate();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -65,6 +66,7 @@ export default function Login() {
     try {
       registerData({ url: "auth/login", dados: usuario })
       authenticStore.login({ email: email, token: response })
+      response && navigate('/dashboard')
     } catch (erro) {
       erro && alert('Não foi possível fazer login')
     }
