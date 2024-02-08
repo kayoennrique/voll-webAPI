@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import logo from './Logo.png';
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
 import FiledDigitation from "../../components/FieldDigitation";
+import usePost from "../../usePost";
 
 const Image = styled.img`
   padding: 2em 0;
@@ -44,15 +45,34 @@ const ButtonCustomized = styled(Button)`
   width: 50%;
 `;
 
+interface ILogin {
+  email: string,
+  senha: string
+}
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const { registerData, erro, success } = usePost();
+
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const usuario: ILogin = {
+      email: email,
+      senha: senha
+    }
+    try {
+      registerData({ url: "auth/login", dados: usuario })
+    } catch (erro) {
+      erro && alert('Não foi possível fazer login')
+    }
+  }
 
   return (
     <>
       <Image src={logo} alt="Logo da Voll" />
       <Title>Faça login em sua conta</Title>
-      <Form>
+      <Form onSubmit={handleLogin}>
         <FiledDigitation kind="email" label="Email" amount={email} placeholder="Insira seu endereço de email" onChange={setEmail} />
         <FiledDigitation kind="password" label="Senha" amount={senha} placeholder="Insira sua senha" onChange={setSenha} />
         <ButtonCustomized type="submit">Entrar</ButtonCustomized>
