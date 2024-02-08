@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Assessment from "../../components/Assessment";
 import Button from "../../components/Button";
 import Container from "../../components/Container";
@@ -7,10 +8,21 @@ import Tablle from "../../components/Table";
 import Title from "../../components/Title";
 import useDataProfessional from "../../useDataProfessional";
 import useQueryData from "../../useQueryData";
+import RegisterModal from "./Modal";
 
 export default function Dashboard() {
   const { dados: consultas, erro: queriesErro } = useQueryData();
   const { dados: profissionais, erro: errroProfessional } = useDataProfessional();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   if (queriesErro || errroProfessional) {
     console.log("Ocorreu um erro na requisição")
@@ -19,7 +31,8 @@ export default function Dashboard() {
   return (
     <Container>
       <Title>Área Administrativa</Title>
-      <Button>Cadastrar especialista</Button>
+      <Button onClick={() => handleOpen()}>Cadastrar especialista</Button>
+      <RegisterModal open={open} handleClose={handleClose} />
       <Title imagem="query">Consultas do Dia</Title>
       <Tablle consultas={consultas} />
       <Title imagem="graphic">Consultas mensais por especialista</Title>
