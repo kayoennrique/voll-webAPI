@@ -6,6 +6,9 @@ import styled from "styled-components";
 import FieldDigitation from "../../../components/FieldDigitation";
 import Button from "../../../components/Button";
 import Subtitle from "../../../components/Subtitle";
+import IProfessional from "../../../types/IProfessional";
+import usePost from "../../../usePost";
+import authenticStore from "../../../stores/authenticate.store";
 
 const CustomizedBox = styled(Box)`
     position: fixed;
@@ -62,6 +65,8 @@ export default function ModalCadastro({ open, handleClose }: { open: boolean, ha
   const [estado, setEstado] = useState("");
   const [telefone, setTelefone] = useState("");
   const label = { inputProps: { 'aria-label': 'Atende por plano?' } };
+  const { registerData } = usePost();
+  const { usuario } = authenticStore;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const checkboxValue = event.target.value;
@@ -71,6 +76,32 @@ export default function ModalCadastro({ open, handleClose }: { open: boolean, ha
       setPlanosSelecionados(planosSelecionados.filter(plano => plano !== checkboxValue));
     }
   };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const profissional: IProfessional = {
+      nome: nome,
+      crm: crm,
+      especialidade: especialidade,
+      possuiPlanoSaude: possuiPlano,
+      estaAtivo: true,
+      imagem: imagem,
+      senha: senha,
+      planoSaude: planosSelecionados,
+      email: email,
+      telefone: telefone,
+      endereco: {
+        cep: cep,
+        rua: rua,
+        estado: estado,
+        numero: numero,
+        complemento: complemento
+      }
+    }
+
+    await registerData({ url: "especialista", dados: profissional, token: usuario.token })
+  }
 
   return (
     <>
@@ -82,7 +113,7 @@ export default function ModalCadastro({ open, handleClose }: { open: boolean, ha
       >
         <CustomizedBox>
           <Title>Cadastre o especialista inserindo os dados abaixo:</Title>
-          <form>
+          <form onSubmit={handleSubmit}>
             <Container>
               <FieldDigitation kind="text" label="Nome" amount={nome} placeholder="Digite seu nome completo" onChange={setNome} />
               <FieldDigitation kind="email" label="Email" amount={email} placeholder="Digite seu email" onChange={setEmail} />

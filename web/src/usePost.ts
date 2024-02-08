@@ -5,14 +5,20 @@ export default function usePost() {
   const [success, setSuccess] = useState(false);
   const [response, setResponse] = useState('');
 
-  async function registerData<T>({ url, dados }:
-    { url: string, dados: T }) {
+  async function registerData<T>({ url, dados, token }:
+    { url: string, dados: T, token?: string }) {
+
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json'
+    }
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
     try {
       const response = await fetch(`http://localhost:8080/${url}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers,
         body: JSON.stringify(dados)
       })
       setSuccess(true);

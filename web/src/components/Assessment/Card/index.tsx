@@ -65,7 +65,7 @@ function Card({ profissional }: { profissional: IProfessional }) {
         <StyledItem>
           <Rating
             name="simple-controlled"
-            value={profissional.nota}
+            value={3}
             readOnly={true}
           />
         </StyledItem>
