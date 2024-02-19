@@ -1,23 +1,23 @@
-# Versão do NodeJS
+# NodeJS version
 
-- Nesse projeto estamos usando a versão **16.0.0** do NodeJS
+- In this project we are using version **16.0.0** of NodeJS
 
-# Iniciando o projeto
+# Starting the project
 
-Depois de baixar o código para a sua máquina, execute o comando
+After downloading the code to your machine, run the command
 
 ```
 npm install
 ```
 
-Esse comando irá instalar todas as dependencias do projeto na sua máquina.
+This command will install all project dependencies on your machine.
 
-## Executando o projeto
+## Running the project
 
-Depois de instalar todas as dependências execute o comando
+After installing all dependencies, run the command
 
 ```
 npm start
 ```
 
-Assim o seu projeto será compilado e o servidor será esecutado na url `localhost:3000`
+This way your project will be compiled and the server will run at the url `localhost:3000`

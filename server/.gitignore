@@ -3,7 +3,6 @@
 node_modules/
 build/
 tmp/
-.env
 temp/
 db_data/
 database/
